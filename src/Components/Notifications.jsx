@@ -1,4 +1,7 @@
+import { useState } from "react";
+
 export default function Notification() {
+  const [userData, setUserData] = useState(data);
   return (
     <div className="bg-white w-[730px] pl-[32px] pt-[33px] pr-[30px] pb-[18px] rounded-[15px]">
       <header className="flex justify-between items-center">
