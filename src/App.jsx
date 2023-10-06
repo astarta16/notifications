@@ -1,8 +1,11 @@
+import Notification from './Components/Notifications'
+
 function App() {
+    
  return(
-    <h1 className="text-3xl font-bold underline">
-    Hello world!
-  </h1>
+    <main className='bg-[#F7FAFD] h-[100vh] flex justify-center items-center'>
+        <Notification />
+    </main>
  );
 }
 
