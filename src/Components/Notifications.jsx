@@ -8,6 +8,7 @@ export default function Notification() {
   }));
   const [userData, setUserData] = useState(initialUserData);
   const [allRead, setAllRead] = useState(false);
+  const [notificationCount, setNotificationCount] = useState(3); // Add state for notification count
 
   const markAsRead = () => {
     const updatedUserData = userData.map((item) => ({
@@ -16,6 +17,7 @@ export default function Notification() {
     }));
     setUserData(updatedUserData);
     setAllRead(true);
+    setNotificationCount(0); 
   };
 
   return (
@@ -24,10 +26,10 @@ export default function Notification() {
         <h1 className="text-[24px] font-[800]">
           Notifications
           <span className="text-[16px] bg-[#0A327B] text-white px-[11px] py-[4px] ml-1 rounded-[6px]">
-            3
+            {notificationCount}
           </span>
         </h1>
-        <p onClick={markAsRead}>Mark all as read</p>
+        <p className="cursor-pointer"onClick={markAsRead}>Mark all as read</p>
       </header>
       <div className="mt-[30px] flex flex-col gap-[20px]">
         {userData.map((item, index) => {
