@@ -3,6 +3,10 @@ import data from "../../data.json";
 
 export default function Notification() {
   const [userData, setUserData] = useState(data);
+const markAsRead = () => {
+
+}
+
   return (
     <div className="bg-white w-[730px] pl-[32px] pt-[33px] pr-[30px] pb-[18px] rounded-[15px]">
       <header className="flex justify-between items-center">
@@ -12,7 +16,7 @@ export default function Notification() {
             3
           </span>
         </h1>
-        <p>Mark all as read</p>
+        <p onClick={markAsRead}>Mark all as read</p>
       </header>
       <div className="mt-[30px] flex flex-col gap-[20px]">
         {userData.map((item, index) => {
