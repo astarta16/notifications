@@ -1,4 +1,5 @@
 import { useState } from "react";
+import data from "../../data.json";
 
 export default function Notification() {
   const [userData, setUserData] = useState(data);
@@ -13,6 +14,30 @@ export default function Notification() {
         </h1>
         <p>Mark all as read</p>
       </header>
+      <div className="mt-[30px] flex flex-col gap-[20px]">
+        {userData.map((item) => {
+          return (
+            <div className="flex gap-[20px] items-center">
+              <img
+                src={`./assets/avatar-${item.author
+                  .replace(" ", "-")
+                  .toLocaleLowerCase()}.webp`}
+                  className="w-[46px]"
+              />
+              <div>
+                <p>
+                  <span>{item.author}</span>
+                  {" "}
+                  <span>{item.type}</span>
+                  {" "}
+                  <span>{item.content}</span>
+                </p>
+                <p>{item.time}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
