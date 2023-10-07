@@ -2,10 +2,21 @@ import { useState } from "react";
 import data from "../../data.json";
 
 export default function Notification() {
-  const [userData, setUserData] = useState(data);
-const markAsRead = () => {
+  const initialUserData = data.map((item, index) => ({
+    ...item,
+    read: index < 3 ? false : true,
+  }));
+  const [userData, setUserData] = useState(initialUserData);
+  const [allRead, setAllRead] = useState(false);
 
-}
+  const markAsRead = () => {
+    const updatedUserData = userData.map((item) => ({
+      ...item,
+      read: true,
+    }));
+    setUserData(updatedUserData);
+    setAllRead(true);
+  };
 
   return (
     <div className="bg-white w-[730px] pl-[32px] pt-[33px] pr-[30px] pb-[18px] rounded-[15px]">
@@ -20,14 +31,13 @@ const markAsRead = () => {
       </header>
       <div className="mt-[30px] flex flex-col gap-[20px]">
         {userData.map((item, index) => {
-          const isRead = item.read || index < 3; // Apply background color to the first 3 blocks or if 'item.read' is true
+          const isRead = item.read || allRead;
           return (
             <div
               className={`flex gap-[20px] items-center ${
-                isRead ? "bg-[#F7FAFD] p-3" : "bg-transparent"
-              }`}
-              key={index}
-            >
+                isRead ? "bg-white" : "bg-[#F7FAFD]"
+              } p-3`}
+              key={index}>
               <img
                 src={`./assets/avatar-${item.author
                   .replace(" ", "-")
@@ -37,12 +47,13 @@ const markAsRead = () => {
               />
               <div>
                 <p>
-                  <span>{item.author}</span>
-                  {" "}
-                  <span>{item.type}</span>
-                  {" "}
+                  <span>{item.author}</span> <span>{item.type}</span>{" "}
                   {item.content && item.content.includes(".webp") ? (
-                    <img src={item.content} alt="Notification Content" />
+                    <img
+                      className="float-right w-[45px] ml-[180px]"
+                      src={item.content}
+                      alt="Notification Content"
+                    />
                   ) : (
                     <span>{item.content}</span>
                   )}
